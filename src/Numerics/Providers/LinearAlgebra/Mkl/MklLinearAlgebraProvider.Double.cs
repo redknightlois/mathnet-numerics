@@ -105,7 +105,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 throw new ArgumentException(Resources.ArgumentArraysSameLength);
             }
 
-            return SafeNativeMethods.d_dot_product(x.Length, x, y);
+            return SafeNativeMethods.d_dot_product(x.Length, x, 0, y, 0);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 return;
             }
 
-            SafeNativeMethods.d_axpy(y.Length, alpha, x, result);
+            SafeNativeMethods.d_axpy(y.Length, alpha, x, 0, result, 0);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 return;
             }
 
-            SafeNativeMethods.d_scale(x.Length, alpha, result);
+            SafeNativeMethods.d_scale(x.Length, alpha, result, 0);
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 throw new ArgumentException(Resources.ArgumentMatrixDimensions);
             }
 
-            SafeNativeMethods.d_matrix_multiply(transposeA, transposeB, m, n, k, alpha, a, b, beta, c);
+            SafeNativeMethods.d_matrix_multiply(transposeA, transposeB, m, n, k, alpha, a, 0, b, 0, beta, c, 0);
         }
 
         /// <summary>
@@ -1207,7 +1207,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 throw new ArgumentException(Resources.ArgumentArraysSameLength);
             }
 
-            SafeNativeMethods.d_vector_add(x.Length, x, y, result);
+            SafeNativeMethods.d_vector_add(x.Length, x, 0, y, 0, result, 0);
         }
 
         /// <summary>
@@ -1242,7 +1242,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 throw new ArgumentException(Resources.ArgumentArraysSameLength);
             }
 
-            SafeNativeMethods.d_vector_subtract(x.Length, x, y, result);
+            SafeNativeMethods.d_vector_subtract(x.Length, x, 0, y, 0, result, 0);
         }
 
         /// <summary>
@@ -1277,7 +1277,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 throw new ArgumentException(Resources.ArgumentArraysSameLength);
             }
 
-            SafeNativeMethods.d_vector_multiply(x.Length, x, y, result);
+            SafeNativeMethods.d_vector_multiply(x.Length, x, 0, y, 0, result, 0);
         }
 
         /// <summary>
@@ -1312,7 +1312,7 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
                 throw new ArgumentException(Resources.ArgumentArraysSameLength);
             }
 
-            SafeNativeMethods.d_vector_divide(x.Length, x, y, result);
+            SafeNativeMethods.d_vector_divide(x.Length, x, 0, y, 0, result, 0);
         }
 
         /// <summary>

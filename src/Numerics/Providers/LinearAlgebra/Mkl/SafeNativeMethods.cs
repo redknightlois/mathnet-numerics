@@ -63,52 +63,52 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
         #region BLAS
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void s_axpy(int n, float alpha, float[] x, [In, Out] float[] y);
+        internal static extern void s_axpy(int n, float alpha, float[] x, int xOffset, [In, Out] float[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void d_axpy(int n, double alpha, double[] x, [In, Out] double[] y);
+        internal static extern void d_axpy(int n, double alpha, double[] x, int xOffset, [In, Out] double[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void c_axpy(int n, Complex32 alpha, Complex32[] x, [In, Out] Complex32[] y);
+        internal static extern void c_axpy(int n, Complex32 alpha, Complex32[] x, int xOffset, [In, Out] Complex32[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void z_axpy(int n, Complex alpha, Complex[] x, [In, Out] Complex[] y);
+        internal static extern void z_axpy(int n, Complex alpha, Complex[] x, int xOffset, [In, Out] Complex[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void s_scale(int n, float alpha, [Out] float[] x);
+        internal static extern void s_scale(int n, float alpha, [Out] float[] x, int xOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void d_scale(int n, double alpha, [Out] double[] x);
+        internal static extern void d_scale(int n, double alpha, [Out] double[] x, int xOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void c_scale(int n, Complex32 alpha, [In, Out] Complex32[] x);
+        internal static extern void c_scale(int n, Complex32 alpha, [In, Out] Complex32[] x, int xOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void z_scale(int n, Complex alpha, [In, Out] Complex[] x);
+        internal static extern void z_scale(int n, Complex alpha, [In, Out] Complex[] x, int xOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern float s_dot_product(int n, float[] x, float[] y);
+        internal static extern float s_dot_product(int n, float[] x, int xOffset, float[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern double d_dot_product(int n, double[] x, double[] y);
+        internal static extern double d_dot_product(int n, double[] x, int xOffset, double[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern Complex32 c_dot_product(int n, Complex32[] x, Complex32[] y);
+        internal static extern Complex32 c_dot_product(int n, Complex32[] x, int xOffset, Complex32[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern Complex z_dot_product(int n, Complex[] x, Complex[] y);
+        internal static extern Complex z_dot_product(int n, Complex[] x, int xOffset, Complex[] y, int yOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void s_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, float alpha, float[] x, float[] y, float beta, [In, Out] float[] c);
+        internal static extern void s_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, float alpha, float[] x, int xOffset, float[] y, int yOffset, float beta, [In, Out] float[] c, int cOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void d_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, double alpha, double[] x, double[] y, double beta, [In, Out] double[] c);
+        internal static extern void d_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, double alpha, double[] x, int xOffset, double[] y, int yOffset, double beta, [In, Out] double[] c, int cOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void c_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, Complex32 alpha, Complex32[] x, Complex32[] y, Complex32 beta, [In, Out] Complex32[] c);
+        internal static extern void c_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, Complex32 alpha, Complex32[] x, int xOffset, Complex32[] y, int yOffset, Complex32 beta, [In, Out] Complex32[] c, int cOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void z_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, Complex alpha, Complex[] x, Complex[] y, Complex beta, [In, Out] Complex[] c);
+        internal static extern void z_matrix_multiply(Transpose transA, Transpose transB, int m, int n, int k, Complex alpha, Complex[] x, int xOffset, Complex[] y, int yOffset, Complex beta, [In, Out] Complex[] c, int cOffset);
 
         #endregion BLAS
 
@@ -299,52 +299,52 @@ namespace MathNet.Numerics.Providers.LinearAlgebra.Mkl
         #region Vector Functions
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void s_vector_add(int n, float[] x, float[] y, [In, Out] float[] result);
+        internal static extern void s_vector_add(int n, float[] x, int xOffset, float[] y, int yOffset, [In, Out] float[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void s_vector_subtract(int n, float[] x, float[] y, [In, Out] float[] result);
+        internal static extern void s_vector_subtract(int n, float[] x, int xOffset, float[] y, int yOffset, [In, Out] float[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void s_vector_multiply(int n, float[] x, float[] y, [In, Out] float[] result);
+        internal static extern void s_vector_multiply(int n, float[] x, int xOffset, float[] y, int yOffset, [In, Out] float[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void s_vector_divide(int n, float[] x, float[] y, [In, Out] float[] result);
+        internal static extern void s_vector_divide(int n, float[] x, int xOffset, float[] y, int yOffset, [In, Out] float[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void d_vector_add(int n, double[] x, double[] y, [In, Out] double[] result);
+        internal static extern void d_vector_add(int n, double[] x, int xOffset, double[] y, int yOffset, [In, Out] double[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void d_vector_subtract(int n, double[] x, double[] y, [In, Out] double[] result);
+        internal static extern void d_vector_subtract(int n, double[] x, int xOffset, double[] y, int yOffset, [In, Out] double[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void d_vector_multiply(int n, double[] x, double[] y, [In, Out] double[] result);
+        internal static extern void d_vector_multiply(int n, double[] x, int xOffset, double[] y, int yOffset, [In, Out] double[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void d_vector_divide(int n, double[] x, double[] y, [In, Out] double[] result);
+        internal static extern void d_vector_divide(int n, double[] x, int xOffset, double[] y, int yOffset, [In, Out] double[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void c_vector_add(int n, Complex32[] x, Complex32[] y, [In, Out] Complex32[] result);
+        internal static extern void c_vector_add(int n, Complex32[] x, int xOffset, Complex32[] y, int yOffset, [In, Out] Complex32[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void c_vector_subtract(int n, Complex32[] x, Complex32[] y, [In, Out] Complex32[] result);
+        internal static extern void c_vector_subtract(int n, Complex32[] x, int xOffset, Complex32[] y, int yOffset, [In, Out] Complex32[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void c_vector_multiply(int n, Complex32[] x, Complex32[] y, [In, Out] Complex32[] result);
+        internal static extern void c_vector_multiply(int n, Complex32[] x, int xOffset, Complex32[] y, int yOffset, [In, Out] Complex32[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void c_vector_divide(int n, Complex32[] x, Complex32[] y, [In, Out] Complex32[] result);
+        internal static extern void c_vector_divide(int n, Complex32[] x, int xOffset, Complex32[] y, int yOffset, [In, Out] Complex32[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void z_vector_add(int n, Complex[] x, Complex[] y, [In, Out] Complex[] result);
+        internal static extern void z_vector_add(int n, Complex[] x, int xOffset, Complex[] y, int yOffset, [In, Out] Complex[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void z_vector_subtract(int n, Complex[] x, Complex[] y, [In, Out] Complex[] result);
+        internal static extern void z_vector_subtract(int n, Complex[] x, int xOffset, Complex[] y, int yOffset, [In, Out] Complex[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void z_vector_multiply(int n, Complex[] x, Complex[] y, [In, Out] Complex[] result);
+        internal static extern void z_vector_multiply(int n, Complex[] x, int xOffset, Complex[] y, int yOffset, [In, Out] Complex[] result, int rOffset);
 
         [DllImport(DllName, ExactSpelling = true, SetLastError = false, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void z_vector_divide(int n, Complex[] x, Complex[] y, [In, Out] Complex[] result);
+        internal static extern void z_vector_divide(int n, Complex[] x, int xOffset, Complex[] y, int yOffset, [In, Out] Complex[] result, int rOffset);
 
         #endregion  Vector Functions
 
