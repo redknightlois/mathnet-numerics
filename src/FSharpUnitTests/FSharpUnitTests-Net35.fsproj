@@ -12,6 +12,7 @@
     <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,50 +56,60 @@
     <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="VectorTests.fs" />
-    <Compile Include="SparseVectorTests.fs" />
-    <Compile Include="DenseVectorTests.fs" />
-    <Compile Include="MatrixTests.fs" />
-    <Compile Include="SparseMatrixTests.fs" />
-    <Compile Include="DenseMatrixTests.fs" />
-    <Compile Include="Utilities.fs" />
-    <Compile Include="BigRationalTests.fs" />
-    <Compile Include="RandomVariableTests.fs" />
-    <Compile Include="PokerTests.fs" />
-    <Compile Include="FitTests.fs" />
-    <Compile Include="FindRootsTests.fs" />
-    <None Include="paket.references" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <ProjectReference Include="..\FSharp\FSharp-Net35.fsproj">
-      <Name>FSharp-Net35</Name>
-      <Project>{d5dbcec0-9d9d-4a62-9ee0-f78e1895d4f4}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Numerics\Numerics-Net35.csproj">
-      <Name>Numerics-Net35</Name>
-      <Project>{e54e712d-eb6b-4fbf-b29a-6bb95e719bac}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
       <Choose>
         <When Condition="$(TargetFrameworkVersion) == 'v1.0'">
+          <ItemGroup>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+          </ItemGroup>
         </When>
         <When Condition="$(TargetFrameworkVersion) == 'v1.1'">
+          <ItemGroup>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+          </ItemGroup>
         </When>
         <When Condition="$(TargetFrameworkVersion) == 'v2.0'">
+          <ItemGroup>
+            <Reference Include="FsUnit.NUnit">
+              <HintPath>..\..\packages\FsUnit\Lib\Net20\FsUnit.NUnit.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+          </ItemGroup>
         </When>
         <When Condition="$(TargetFrameworkVersion) == 'v3.5'">
           <ItemGroup>
             <Reference Include="FSharp.Core">
               <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net35\FSharp.Core.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="FsUnit.NUnit">
+              <HintPath>..\..\packages\FsUnit\Lib\Net20\FsUnit.NUnit.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
@@ -111,6 +122,21 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
+            <Reference Include="FsUnit.NUnit">
+              <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
           </ItemGroup>
         </When>
         <When Condition="$(TargetFrameworkVersion) == 'v4.0'">
@@ -120,12 +146,42 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
+            <Reference Include="FsUnit.NUnit">
+              <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
           </ItemGroup>
         </When>
         <Otherwise>
           <ItemGroup>
             <Reference Include="FSharp.Core">
               <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="FsUnit.NUnit">
+              <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
@@ -149,12 +205,42 @@
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
+        <Reference Include="FsUnit.NUnit">
+          <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Threading">
+          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
       </ItemGroup>
     </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
       <ItemGroup>
         <Reference Include="FSharp.Core">
           <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="FsUnit.NUnit">
+          <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Threading">
+          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -169,12 +255,42 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
+            <Reference Include="FsUnit.NUnit">
+              <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
           </ItemGroup>
         </When>
         <When Condition="$(SilverlightVersion) == 'v4.0'">
           <ItemGroup>
             <Reference Include="FSharp.Core">
               <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="FsUnit.NUnit">
+              <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
@@ -187,147 +303,16 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
-          </ItemGroup>
-        </Otherwise>
-      </Choose>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'Windows'">
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
-      <Choose>
-        <When Condition="$(TargetFrameworkVersion) == 'v1.0'">
-        </When>
-        <When Condition="$(TargetFrameworkVersion) == 'v1.1'">
-        </When>
-        <When Condition="$(TargetFrameworkVersion) == 'v2.0'">
-          <ItemGroup>
             <Reference Include="FsUnit.NUnit">
-              <HintPath>..\..\packages\FsUnit\lib\Net20\FsUnit.NUnit.dll</HintPath>
+              <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
-          </ItemGroup>
-        </When>
-        <When Condition="$(TargetFrameworkVersion) == 'v3.5'">
-          <ItemGroup>
-            <Reference Include="FsUnit.NUnit">
-              <HintPath>..\..\packages\FsUnit\lib\Net20\FsUnit.NUnit.dll</HintPath>
+            <Reference Include="nunit.framework">
+              <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
-          </ItemGroup>
-        </When>
-        <Otherwise>
-          <ItemGroup>
-            <Reference Include="FsUnit.NUnit">
-              <HintPath>..\..\packages\FsUnit\lib\Net40\FsUnit.NUnit.dll</HintPath>
-              <Private>True</Private>
-              <Paket>True</Paket>
-            </Reference>
-          </ItemGroup>
-        </Otherwise>
-      </Choose>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
-      <ItemGroup>
-        <Reference Include="FsUnit.NUnit">
-          <HintPath>..\..\packages\FsUnit\lib\Net40\FsUnit.NUnit.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
-      <ItemGroup>
-        <Reference Include="FsUnit.NUnit">
-          <HintPath>..\..\packages\FsUnit\lib\Net40\FsUnit.NUnit.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight'">
-      <ItemGroup>
-        <Reference Include="FsUnit.NUnit">
-          <HintPath>..\..\packages\FsUnit\lib\Net40\FsUnit.NUnit.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'Windows'">
-      <ItemGroup>
-        <Reference Include="FsUnit.NUnit">
-          <HintPath>..\..\packages\FsUnit\lib\Net40\FsUnit.NUnit.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
-      <ItemGroup>
-        <Reference Include="FsUnit.NUnit">
-          <HintPath>..\..\packages\FsUnit\lib\Net40\FsUnit.NUnit.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="FsUnit.NUnit">
-          <HintPath>..\..\packages\FsUnit\lib\Net40\FsUnit.NUnit.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
-  <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-      <Paket>True</Paket>
-    </Reference>
-  </ItemGroup>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
-      <Choose>
-        <When Condition="$(TargetFrameworkVersion) == 'v1.0'">
-        </When>
-        <When Condition="$(TargetFrameworkVersion) == 'v1.1'">
-        </When>
-        <When Condition="$(TargetFrameworkVersion) == 'v2.0'">
-        </When>
-        <Otherwise>
-          <ItemGroup>
             <Reference Include="System.Threading">
               <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
@@ -337,35 +322,23 @@
         </Otherwise>
       </Choose>
     </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
-      <ItemGroup>
-        <Reference Include="System.Threading">
-          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
-      <ItemGroup>
-        <Reference Include="System.Threading">
-          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight'">
-      <ItemGroup>
-        <Reference Include="System.Threading">
-          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'Windows'">
       <ItemGroup>
+        <Reference Include="FSharp.Core">
+          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="FsUnit.NUnit">
+          <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.Threading">
           <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
@@ -375,6 +348,21 @@
     </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
       <ItemGroup>
+        <Reference Include="FSharp.Core">
+          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="FsUnit.NUnit">
+          <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.Threading">
           <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
@@ -384,6 +372,21 @@
     </When>
     <Otherwise>
       <ItemGroup>
+        <Reference Include="FSharp.Core">
+          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="FsUnit.NUnit">
+          <HintPath>..\..\packages\FsUnit\Lib\Net40\FsUnit.NUnit.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="nunit.framework">
+          <HintPath>..\..\packages\NUnit\lib\nunit.framework.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.Threading">
           <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
@@ -392,4 +395,47 @@
       </ItemGroup>
     </Otherwise>
   </Choose>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="VectorTests.fs" />
+    <Compile Include="SparseVectorTests.fs" />
+    <Compile Include="DenseVectorTests.fs" />
+    <Compile Include="MatrixTests.fs" />
+    <Compile Include="SparseMatrixTests.fs" />
+    <Compile Include="DenseMatrixTests.fs" />
+    <Compile Include="Utilities.fs" />
+    <Compile Include="BigRationalTests.fs" />
+    <Compile Include="RandomVariableTests.fs" />
+    <Compile Include="PokerTests.fs" />
+    <Compile Include="FitTests.fs" />
+    <Compile Include="FindRootsTests.fs" />
+    <None Include="paket.references" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Corvalius.ArraySlice">
+      <HintPath>..\..\packages\ArraySlice.Fody.0.5.9\Lib\net35\Corvalius.ArraySlice.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <ProjectReference Include="..\FSharp\FSharp-Net35.fsproj">
+      <Name>FSharp-Net35</Name>
+      <Project>{d5dbcec0-9d9d-4a62-9ee0-f78e1895d4f4}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Numerics\Numerics-Net35.csproj">
+      <Name>Numerics-Net35</Name>
+      <Project>{e54e712d-eb6b-4fbf-b29a-6bb95e719bac}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>

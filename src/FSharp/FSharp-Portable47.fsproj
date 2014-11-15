@@ -13,6 +13,8 @@
     <TargetFrameworkProfile>Profile47</TargetFrameworkProfile>
     <TargetFSharpCoreVersion>2.3.5.1</TargetFSharpCoreVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <NuGetPackageImportStamp>4735a292</NuGetPackageImportStamp>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineConstants>TRACE;PORTABLE</DefineConstants>
@@ -45,30 +47,6 @@
     <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.Portable.FSharp.Targets</FSharpTargetsPath>
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Compatibility.fs" />
-    <Compile Include="Statistics.fs" />
-    <Compile Include="Random.fs" />
-    <Compile Include="Distributions.fs" />
-    <Compile Include="Generate.fs" />
-    <Compile Include="LinearAlgebra.Vector.fs" />
-    <Compile Include="LinearAlgebra.Matrix.fs" />
-    <Compile Include="Complex.fs" />
-    <Compile Include="BigIntegerExtensions.fs" />
-    <Compile Include="BigRational.fsi" />
-    <Compile Include="BigRational.fs" />
-    <Compile Include="Fit.fs" />
-    <Compile Include="FindRoots.fs" />
-    <Compile Include="RandomVariable.fs" />
-    <None Include="MathNet.Numerics.fsx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Numerics\Numerics-Portable47.csproj">
-      <Name>Numerics-Portable47</Name>
-      <Project>{49205185-621E-FFB9-2104-887C9F1BBD13}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
       <Choose>
@@ -248,4 +226,45 @@
       </ItemGroup>
     </Otherwise>
   </Choose>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Compatibility.fs" />
+    <Compile Include="Statistics.fs" />
+    <Compile Include="Random.fs" />
+    <Compile Include="Distributions.fs" />
+    <Compile Include="Generate.fs" />
+    <Compile Include="LinearAlgebra.Vector.fs" />
+    <Compile Include="LinearAlgebra.Matrix.fs" />
+    <Compile Include="Complex.fs" />
+    <Compile Include="BigIntegerExtensions.fs" />
+    <Compile Include="BigRational.fsi" />
+    <Compile Include="BigRational.fs" />
+    <Compile Include="Fit.fs" />
+    <Compile Include="FindRoots.fs" />
+    <Compile Include="RandomVariable.fs" />
+    <None Include="MathNet.Numerics.fsx" />
+    <Content Include="FodyWeavers.xml" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Numerics\Numerics-Portable47.csproj">
+      <Name>Numerics-Portable47</Name>
+      <Project>{49205185-621E-FFB9-2104-887C9F1BBD13}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Corvalius.ArraySlice">
+      <HintPath>..\..\packages\ArraySlice.Fody.0.5.9\Lib\portable-net45+sl5+netcore45+MonoAndroid1+MonoTouch1\Corvalius.ArraySlice.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\..\packages\Fody.1.26.1\build\Fody.targets" Condition="Exists('..\..\packages\Fody.1.26.1\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Fody.1.26.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.1.26.1\build\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>

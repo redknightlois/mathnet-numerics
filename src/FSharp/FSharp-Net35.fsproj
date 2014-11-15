@@ -12,6 +12,7 @@
     <TargetFSharpCoreVersion>4.3.0.0</TargetFSharpCoreVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <AssemblyOriginatorKeyFile>..\MathNet.Numerics.snk</AssemblyOriginatorKeyFile>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,36 +58,6 @@
     <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Compatibility.fs" />
-    <Compile Include="Statistics.fs" />
-    <Compile Include="Random.fs" />
-    <Compile Include="Distributions.fs" />
-    <Compile Include="Generate.fs" />
-    <Compile Include="LinearAlgebra.Vector.fs" />
-    <Compile Include="LinearAlgebra.Matrix.fs" />
-    <Compile Include="Complex.fs" />
-    <Compile Include="BigIntegerExtensions.fs" />
-    <Compile Include="BigRational.fsi" />
-    <Compile Include="BigRational.fs" />
-    <Compile Include="Fit.fs" />
-    <Compile Include="FindRoots.fs" />
-    <Compile Include="RandomVariable.fs" />
-    <None Include="MathNet.Numerics.fsx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Numerics\Numerics-Net35.csproj">
-      <Name>Numerics-Net35</Name>
-      <Project>{e54e712d-eb6b-4fbf-b29a-6bb95e719bac}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
       <Choose>
@@ -103,12 +74,22 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
           </ItemGroup>
         </When>
         <When Condition="$(TargetFrameworkVersion) == 'v4.0' And $(TargetFrameworkProfile) == 'Client'">
           <ItemGroup>
             <Reference Include="FSharp.Core">
               <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net40\FSharp.Core.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
@@ -121,12 +102,22 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
           </ItemGroup>
         </When>
         <Otherwise>
           <ItemGroup>
             <Reference Include="FSharp.Core">
               <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
@@ -150,12 +141,22 @@
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
+        <Reference Include="System.Threading">
+          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
       </ItemGroup>
     </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
       <ItemGroup>
         <Reference Include="FSharp.Core">
           <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Threading">
+          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -170,12 +171,22 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
           </ItemGroup>
         </When>
         <When Condition="$(SilverlightVersion) == 'v4.0'">
           <ItemGroup>
             <Reference Include="FSharp.Core">
               <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+              <Private>True</Private>
+              <Paket>True</Paket>
+            </Reference>
+            <Reference Include="System.Threading">
+              <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
@@ -188,49 +199,6 @@
               <Private>True</Private>
               <Paket>True</Paket>
             </Reference>
-          </ItemGroup>
-        </Otherwise>
-      </Choose>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'Windows'">
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <Reference Include="FSharp.Core">
-          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
-      <Choose>
-        <When Condition="$(TargetFrameworkVersion) == 'v1.0'">
-        </When>
-        <When Condition="$(TargetFrameworkVersion) == 'v1.1'">
-        </When>
-        <When Condition="$(TargetFrameworkVersion) == 'v2.0'">
-        </When>
-        <Otherwise>
-          <ItemGroup>
             <Reference Include="System.Threading">
               <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
               <Private>True</Private>
@@ -240,35 +208,13 @@
         </Otherwise>
       </Choose>
     </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
-      <ItemGroup>
-        <Reference Include="System.Threading">
-          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
-      <ItemGroup>
-        <Reference Include="System.Threading">
-          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight'">
-      <ItemGroup>
-        <Reference Include="System.Threading">
-          <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'Windows'">
       <ItemGroup>
+        <Reference Include="FSharp.Core">
+          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.Threading">
           <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
@@ -278,6 +224,11 @@
     </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
       <ItemGroup>
+        <Reference Include="FSharp.Core">
+          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.Threading">
           <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
@@ -287,6 +238,11 @@
     </When>
     <Otherwise>
       <ItemGroup>
+        <Reference Include="FSharp.Core">
+          <HintPath>..\..\packages\FSharp.Core.4.3.0.0.Microsoft.Signed\lib\net45\FSharp.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
         <Reference Include="System.Threading">
           <HintPath>..\..\packages\TaskParallelLibrary\lib\Net35\System.Threading.dll</HintPath>
           <Private>True</Private>
@@ -295,4 +251,44 @@
       </ItemGroup>
     </Otherwise>
   </Choose>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Compatibility.fs" />
+    <Compile Include="Statistics.fs" />
+    <Compile Include="Random.fs" />
+    <Compile Include="Distributions.fs" />
+    <Compile Include="Generate.fs" />
+    <Compile Include="LinearAlgebra.Vector.fs" />
+    <Compile Include="LinearAlgebra.Matrix.fs" />
+    <Compile Include="Complex.fs" />
+    <Compile Include="BigIntegerExtensions.fs" />
+    <Compile Include="BigRational.fsi" />
+    <Compile Include="BigRational.fs" />
+    <Compile Include="Fit.fs" />
+    <Compile Include="FindRoots.fs" />
+    <Compile Include="RandomVariable.fs" />
+    <None Include="MathNet.Numerics.fsx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Corvalius.ArraySlice">
+      <HintPath>..\..\packages\ArraySlice.Fody.0.5.9\Lib\net35\Corvalius.ArraySlice.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <ProjectReference Include="..\Numerics\Numerics-Net35.csproj">
+      <Name>Numerics-Net35</Name>
+      <Project>{e54e712d-eb6b-4fbf-b29a-6bb95e719bac}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>

@@ -1,45 +1,11 @@
-// <copyright file="ArrayStatistics.cs" company="Math.NET">
-// Math.NET Numerics, part of the Math.NET Project
-// http://numerics.mathdotnet.com
-// http://github.com/mathnet/mathnet-numerics
-// http://mathnetnumerics.codeplex.com
-//
-// Copyright (c) 2009-2014 Math.NET
-//
-// Permission is hereby granted, free of charge, to any person
-// obtaining a copy of this software and associated documentation
-// files (the "Software"), to deal in the Software without
-// restriction, including without limitation the rights to use,
-// copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following
-// conditions:
-//
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-// OTHER DEALINGS IN THE SOFTWARE.
-// </copyright>
-
+﻿using MathNet.Numerics.Properties;
 using System;
-using MathNet.Numerics.Properties;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace MathNet.Numerics.Statistics
 {
-    /// <summary>
-    /// Statistics operating on arrays assumed to be unsorted.
-    /// WARNING: Methods with the Inplace-suffix may modify the data array by reordering its entries.
-    /// </summary>
-    /// <seealso cref="SortedArrayStatistics"/>
-    /// <seealso cref="StreamingStatistics"/>
-    /// <seealso cref="Statistics"/>
     public static partial class ArrayStatistics
     {
         // TODO: Benchmark various options to find out the best approach (-> branch prediction)
@@ -50,7 +16,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or any entry is NaN.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed.</param>
-        public static double Minimum(double[] data)
+        public static double Minimum(ArraySlice<double> data)
         {
             if (data.Length == 0)
             {
@@ -74,7 +40,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or any entry is NaN.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed.</param>
-        public static float Minimum(float[] data)
+        public static float Minimum(ArraySlice<float> data)
         {
             if (data.Length == 0)
             {
@@ -98,7 +64,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or any entry is NaN.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed.</param>
-        public static double Maximum(double[] data)
+        public static double Maximum(ArraySlice<double> data)
         {
             if (data.Length == 0)
             {
@@ -122,7 +88,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or any entry is NaN.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed.</param>
-        public static float Maximum(float[] data)
+        public static float Maximum(ArraySlice<float> data)
         {
             if (data.Length == 0)
             {
@@ -146,7 +112,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or any entry is NaN.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed.</param>
-        public static double Mean(double[] data)
+        public static double Mean(ArraySlice<double> data)
         {
             if (data.Length == 0)
             {
@@ -169,7 +135,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data has less than two entries or if any entry is NaN.
         /// </summary>
         /// <param name="samples">Sample array, no sorting is assumed.</param>
-        public static double Variance(double[] samples)
+        public static double Variance(ArraySlice<double> samples)
         {
             if (samples.Length <= 1)
             {
@@ -194,7 +160,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or if any entry is NaN.
         /// </summary>
         /// <param name="population">Sample array, no sorting is assumed.</param>
-        public static double PopulationVariance(double[] population)
+        public static double PopulationVariance(ArraySlice<double> population)
         {
             if (population.Length == 0)
             {
@@ -219,7 +185,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data has less than two entries or if any entry is NaN.
         /// </summary>
         /// <param name="samples">Sample array, no sorting is assumed.</param>
-        public static double StandardDeviation(double[] samples)
+        public static double StandardDeviation(ArraySlice<double> samples)
         {
             return Math.Sqrt(Variance(samples));
         }
@@ -230,7 +196,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or if any entry is NaN.
         /// </summary>
         /// <param name="population">Sample array, no sorting is assumed.</param>
-        public static double PopulationStandardDeviation(double[] population)
+        public static double PopulationStandardDeviation(ArraySlice<double> population)
         {
             return Math.Sqrt(PopulationVariance(population));
         }
@@ -241,7 +207,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN for mean if data is empty or any entry is NaN and NaN for variance if data has less than two entries or if any entry is NaN.
         /// </summary>
         /// <param name="samples">Sample array, no sorting is assumed.</param>
-        public static Tuple<double, double> MeanVariance(double[] samples)
+        public static Tuple<double, double> MeanVariance(ArraySlice<double> samples)
         {
             return new Tuple<double, double>(Mean(samples), Variance(samples));
         }
@@ -252,7 +218,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN for mean if data is empty or any entry is NaN and NaN for standard deviation if data has less than two entries or if any entry is NaN.
         /// </summary>
         /// <param name="samples">Sample array, no sorting is assumed.</param>
-        public static Tuple<double, double> MeanStandardDeviation(double[] samples)
+        public static Tuple<double, double> MeanStandardDeviation(ArraySlice<double> samples)
         {
             return new Tuple<double, double>(Mean(samples), StandardDeviation(samples));
         }
@@ -264,7 +230,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         /// <param name="samples1">First sample array.</param>
         /// <param name="samples2">Second sample array.</param>
-        public static double Covariance(double[] samples1, double[] samples2)
+        public static double Covariance(ArraySlice<double> samples1, ArraySlice<double> samples2)
         {
             if (samples1.Length != samples2.Length)
             {
@@ -294,7 +260,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         /// <param name="population1">First population array.</param>
         /// <param name="population2">Second population array.</param>
-        public static double PopulationCovariance(double[] population1, double[] population2)
+        public static double PopulationCovariance(ArraySlice<double> population1, ArraySlice<double> population2)
         {
             if (population1.Length != population2.Length)
             {
@@ -322,7 +288,7 @@ namespace MathNet.Numerics.Statistics
         /// Returns NaN if data is empty or any entry is NaN.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed.</param>
-        public static double RootMeanSquare(double[] data)
+        public static double RootMeanSquare(ArraySlice<double> data)
         {
             if (data.Length == 0)
             {
@@ -345,7 +311,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
         /// <param name="order">One-based order of the statistic, must be between 1 and N (inclusive).</param>
-        public static double OrderStatisticInplace(double[] data, int order)
+        public static double OrderStatisticInplace(ArraySlice<double> data, int order)
         {
             if (order < 1 || order > data.Length)
             {
@@ -370,7 +336,7 @@ namespace MathNet.Numerics.Statistics
         /// WARNING: Works inplace and can thus causes the data array to be reordered.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
-        public static double MedianInplace(double[] data)
+        public static double MedianInplace(ArraySlice<double> data)
         {
             var k = data.Length / 2;
             return data.Length.IsOdd()
@@ -386,7 +352,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
         /// <param name="p">Percentile selector, between 0 and 100 (inclusive).</param>
-        public static double PercentileInplace(double[] data, int p)
+        public static double PercentileInplace(ArraySlice<double> data, int p)
         {
             return QuantileInplace(data, p / 100d);
         }
@@ -397,7 +363,7 @@ namespace MathNet.Numerics.Statistics
         /// WARNING: Works inplace and can thus causes the data array to be reordered.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
-        public static double LowerQuartileInplace(double[] data)
+        public static double LowerQuartileInplace(ArraySlice<double> data)
         {
             return QuantileInplace(data, 0.25d);
         }
@@ -408,7 +374,7 @@ namespace MathNet.Numerics.Statistics
         /// WARNING: Works inplace and can thus causes the data array to be reordered.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
-        public static double UpperQuartileInplace(double[] data)
+        public static double UpperQuartileInplace(ArraySlice<double> data)
         {
             return QuantileInplace(data, 0.75d);
         }
@@ -419,7 +385,7 @@ namespace MathNet.Numerics.Statistics
         /// WARNING: Works inplace and can thus causes the data array to be reordered.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
-        public static double InterquartileRangeInplace(double[] data)
+        public static double InterquartileRangeInplace(ArraySlice<double> data)
         {
             return QuantileInplace(data, 0.75d) - QuantileInplace(data, 0.25d);
         }
@@ -430,7 +396,7 @@ namespace MathNet.Numerics.Statistics
         /// WARNING: Works inplace and can thus causes the data array to be reordered.
         /// </summary>
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
-        public static double[] FiveNumberSummaryInplace(double[] data)
+        public static ArraySlice<double> FiveNumberSummaryInplace(ArraySlice<double> data)
         {
             if (data.Length == 0)
             {
@@ -455,7 +421,7 @@ namespace MathNet.Numerics.Statistics
         /// Linear interpolation of the approximate medians for order statistics.
         /// When tau &lt; (2/3) / (N + 1/3), use x1. When tau &gt;= (N - 1/3) / (N + 1/3), use xN.
         /// </remarks>
-        public static double QuantileInplace(double[] data, double tau)
+        public static double QuantileInplace(ArraySlice<double> data, double tau)
         {
             if (tau < 0d || tau > 1d || data.Length == 0)
             {
@@ -493,7 +459,7 @@ namespace MathNet.Numerics.Statistics
         /// <param name="b">b-parameter</param>
         /// <param name="c">c-parameter</param>
         /// <param name="d">d-parameter</param>
-        public static double QuantileCustomInplace(double[] data, double tau, double a, double b, double c, double d)
+        public static double QuantileCustomInplace(ArraySlice<double> data, double tau, double a, double b, double c, double d)
         {
             if (tau < 0d || tau > 1d || data.Length == 0)
             {
@@ -528,7 +494,7 @@ namespace MathNet.Numerics.Statistics
         /// <param name="data">Sample array, no sorting is assumed. Will be reordered.</param>
         /// <param name="tau">Quantile selector, between 0.0 and 1.0 (inclusive)</param>
         /// <param name="definition">Quantile definition, to choose what product/definition it should be consistent with</param>
-        public static double QuantileCustomInplace(double[] data, double tau, QuantileDefinition definition)
+        public static double QuantileCustomInplace(ArraySlice<double> data, double tau, QuantileDefinition definition)
         {
             if (tau < 0d || tau > 1d || data.Length == 0)
             {
@@ -624,7 +590,7 @@ namespace MathNet.Numerics.Statistics
             }
         }
 
-        static double SelectInplace(double[] workingData, int rank)
+        static double SelectInplace(ArraySlice<double> workingData, int rank)
         {
             // Numerical Recipes: select
             // http://en.wikipedia.org/wiki/Selection_algorithm
@@ -732,7 +698,7 @@ namespace MathNet.Numerics.Statistics
         /// with an existing system.
         /// WARNING: Works inplace and can thus causes the data array to be reordered.
         /// </summary>
-        public static double[] RanksInplace(double[] data, RankDefinition definition = RankDefinition.Default)
+        public static ArraySlice<double> RanksInplace(ArraySlice<double> data, RankDefinition definition = RankDefinition.Default)
         {
             var ranks = new double[data.Length];
             var index = new int[data.Length];
@@ -777,7 +743,7 @@ namespace MathNet.Numerics.Statistics
             return ranks;
         }
 
-        static void RanksTies(double[] ranks, int[] index, int a, int b, RankDefinition definition)
+        static void RanksTies(ArraySlice<double> ranks, int[] index, int a, int b, RankDefinition definition)
         {
             // TODO: potential for PERF optimization
             double rank;

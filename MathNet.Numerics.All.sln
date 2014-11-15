@@ -74,6 +74,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests-Portable7", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests-Portable78", "src\UnitTests\UnitTests-Portable78.csproj", "{2769BADC-02D9-48D9-88B4-C7E1C064BDF2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B737451A-703D-4A1C-ACC5-E05703C39699}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -219,6 +226,9 @@ Global
 		{2EBD6F22-9BD6-4AF2-A21B-7198C9C5571F} = {5351407F-74BA-4850-A3E7-D5C2BACEF419}
 		{B170F78B-8C95-4C6A-A437-F05D9302B0B3} = {021F915C-C0E3-468B-A183-5FCF1DEC3754}
 		{2769BADC-02D9-48D9-88B4-C7E1C064BDF2} = {5351407F-74BA-4850-A3E7-D5C2BACEF419}
+	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = e5884bce-201f-4ffb-8cb8-4deac1296f0d
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = src\Numerics\Numerics.csproj
